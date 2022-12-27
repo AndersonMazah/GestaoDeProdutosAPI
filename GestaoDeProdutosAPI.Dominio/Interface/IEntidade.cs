@@ -2,6 +2,6 @@
 {
     public interface IEntidade
     {
-        void Validar();
+        void Validar(bool isNovoRegistro = false);
     }
 }

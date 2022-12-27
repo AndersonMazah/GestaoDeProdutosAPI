@@ -2,8 +2,10 @@
 {
     public static class Mensagens
     {
-        public const string MensagenExcluidoComSucesso = "Excluido com sucesso.";
+        public const string ExcluidoComSucesso = "Excluido com sucesso.";
 
-        public const string MensagenNaoEncontrado = "Registro não encontrado.";
+        public const string RegistroNaoEncontrado = "Registro não encontrado.";
+
+        public const string PreencherCampos = "Os campos devem ser preenchidos.";
     }
 }

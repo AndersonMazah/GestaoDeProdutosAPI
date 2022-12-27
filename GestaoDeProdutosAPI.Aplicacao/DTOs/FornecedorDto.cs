@@ -1,4 +1,4 @@
-﻿namespace GestaoDeProdutosAPI.Dominio.DTOs
+﻿namespace GestaoDeProdutosAPI.Aplicacao.DTOs
 {
     public class FornecedorDto
     {

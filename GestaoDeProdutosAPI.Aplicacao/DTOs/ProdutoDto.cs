@@ -1,7 +1,7 @@
 ﻿using GestaoDeProdutosAPI.Dominio.Enumeradores;
 using System;
 
-namespace GestaoDeProdutosAPI.Dominio.DTOs
+namespace GestaoDeProdutosAPI.Aplicacao.DTOs
 {
     public class ProdutoDto
     {

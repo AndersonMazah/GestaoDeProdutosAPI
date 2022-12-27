@@ -11,7 +11,6 @@ namespace GestaoDeProdutosAPI.Teste.EntidadesData
 
         public IEnumerator<object[]> GetEnumerator()
         {
-            // codigo, descricao, situacao, dataFabricacao, dataValidade, fornecedorCodigo
             yield return new object[] { 0, "", SituacaoProduto.Ativo, DateTime.Now, DateTime.Now, 1, "Código inválido." };
             yield return new object[] { 1, "", SituacaoProduto.Ativo, DateTime.Now, DateTime.Now, 1, "Descrição não pode ser nulo." };
             yield return new object[] { 1, "Descricao", SituacaoProduto.Ativo, DateTime.Now.AddDays(1), DateTime.Now, 1, "A Data de Fabricação não pode ser maior ou igual a Data de Validade." };

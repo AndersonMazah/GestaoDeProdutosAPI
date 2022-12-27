@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\GestaoDeProdutosAPI.Dominio\GestaoDeProdutosAPI.Dominio.csproj" />
+		<ProjectReference Include="..\GestaoDeProdutosAPI.Infra\GestaoDeProdutosAPI.Infra.csproj" />
+		<ProjectReference Include="..\GestaoDeProdutosAPI.Aplicacao\GestaoDeProdutosAPI.Aplicacao.csproj" />
+	</ItemGroup>
+
+</Project>

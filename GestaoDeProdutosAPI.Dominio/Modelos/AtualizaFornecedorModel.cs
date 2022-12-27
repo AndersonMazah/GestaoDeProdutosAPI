@@ -2,7 +2,7 @@
 
 namespace GestaoDeProdutosAPI.Dominio.Modelos
 {
-    public class AtualizaForncedorModel
+    public class AtualizaFornecedorModel
     {
         [Display(Name = "Código")]
         [Required]

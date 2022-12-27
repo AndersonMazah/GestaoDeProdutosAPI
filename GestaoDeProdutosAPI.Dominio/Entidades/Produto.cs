@@ -1,21 +1,30 @@
 ﻿using GestaoDeProdutosAPI.Dominio.Enumeradores;
 using GestaoDeProdutosAPI.Dominio.Exceptions;
 using GestaoDeProdutosAPI.Dominio.Interface;
+using GestaoDeProdutosAPI.Dominio.Modelos;
 using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace GestaoDeProdutosAPI.Dominio.Entidades
 {
+    [Table("produto")]
     public class Produto : EntidadeBase, IEntidade
     {
+        [Column("descricao", TypeName = "NVARCHAR(50)")]
         public string Descricao { get; private set; }
 
+        [Column("situacao", TypeName = "int")]
         public SituacaoProduto Situacao { get; private set; }
 
+        [Column("datafabricacao", TypeName = "DATETIME")]
         public DateTime DataFabricacao { get; private set; }
 
+        [Column("datavalidade", TypeName = "DATETIME")]
         public DateTime DataValidade { get; private set; }
 
+        [Column("idfornecedor", TypeName = "INT")]
         public int FornecedorCodigo { get; private set; }
+        public virtual Fornecedor Fornecedor { get; private set; }
 
         protected Produto() { }
 
@@ -27,12 +36,37 @@ namespace GestaoDeProdutosAPI.Dominio.Entidades
             DataFabricacao = dataFabricacao;
             DataValidade = dataValidade;
             FornecedorCodigo = fornecedorCodigo;
-            Validar();
+            Validar(false);
         }
 
-        public void Validar()
+        public Produto(CadastroProdutoModel modelo)
         {
-            if (Codigo == 0)
+            Descricao = modelo.Descricao;
+            Situacao = modelo.Situacao;
+            DataFabricacao = modelo.DataFabricacao;
+            DataValidade = modelo.DataValidade;
+            FornecedorCodigo = modelo.FornecedorCodigo;
+            Validar(true);
+        }
+
+        public void Atualizar(AtualizaProdutoModel modelo)
+        {
+            Descricao = modelo.Descricao;
+            Situacao = modelo.Situacao;
+            DataFabricacao = modelo.DataFabricacao;
+            DataValidade = modelo.DataValidade;
+            FornecedorCodigo = modelo.FornecedorCodigo;
+            Validar(false);
+        }
+
+        public void MarcarComoDeletado()
+        {
+            Situacao = SituacaoProduto.Inativo;
+        }
+
+        public void Validar(bool isNovoRegistro = false)
+        {
+            if (!isNovoRegistro && Codigo == 0)
             {
                 throw new EntidadeInvalidaException("Produto", "Código inválido.");
             }
