@@ -29,9 +29,14 @@ namespace GestaoDeProdutosAPI.Infra.Repositorios
             return await DbSet.Where(x => x.Codigo == codigo).FirstOrDefaultAsync();
         }
 
-        public async Task<List<Produto>> ObterTodosAsync()
+        public async Task<List<Produto>> ObterTodosNoTrackingAsync(int quantidade, int pagina)
         {
-            List<Produto> lista = await DbSet.ToListAsync();
+            int paginaSelecionada = (pagina - 1) * quantidade;
+            List<Produto> lista = await DbSet
+                .AsNoTracking()
+                .Skip(paginaSelecionada)
+                .Take(quantidade)
+                .ToListAsync();
             return lista;
         }
 

@@ -1,13 +1,13 @@
 ﻿using GestaoDeProdutosAPI.Aplicacao.DTOs;
+using GestaoDeProdutosAPI.Dominio.Entidades;
 using GestaoDeProdutosAPI.Dominio.Modelos;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace GestaoDeProdutosAPI.Aplicacao.Interfaces
 {
     public interface IProdutoAplicacao
     {
-        Task<List<ProdutoDto>> BuscarTodosAsync();
+        Task<Paginacao<ProdutoDto>> BuscarTodosAsync(int quantidade, int pagina);
 
         Task<ProdutoDto> BuscarPorCodigoAsync(int codigo);
 

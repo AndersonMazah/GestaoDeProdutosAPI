@@ -23,10 +23,12 @@ namespace GestaoDeProdutosAPI.Aplicacao.Services
             _produtoRepositorio = produtoReposiorio;
         }
 
-        public async Task<List<ProdutoDto>> BuscarTodosAsync()
+        public async Task<Paginacao<ProdutoDto>> BuscarTodosAsync(int quantidade, int pagina)
         {
-            List<Produto> produtoes = await _produtoRepositorio.ObterTodosAsync();
-            return _mapper.Map<List<Produto>, List<ProdutoDto>>(produtoes);
+            List<Produto> produtos = await _produtoRepositorio.ObterTodosNoTrackingAsync(quantidade, pagina);
+            List<ProdutoDto> produtosDto = _mapper.Map<List<Produto>, List<ProdutoDto>>(produtos);
+            Paginacao<ProdutoDto> retorno = new Paginacao<ProdutoDto>(produtosDto.Count, produtosDto);
+            return retorno;
         }
 
         public async Task<ProdutoDto> BuscarPorCodigoAsync(int codigo)

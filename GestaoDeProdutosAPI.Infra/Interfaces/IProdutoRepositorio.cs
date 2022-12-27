@@ -8,7 +8,7 @@ namespace GestaoDeProdutosAPI.Infra.Interfaces
     {
         Task<Produto> ObterPorCodigoAsync(int codigo);
 
-        Task<List<Produto>> ObterTodosAsync();
+        Task<List<Produto>> ObterTodosNoTrackingAsync(int quantidade, int pagina);
 
         Task CadastrarAsync(Produto produto);
 

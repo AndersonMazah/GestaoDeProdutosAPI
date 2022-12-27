@@ -1,6 +1,7 @@
 using GestaoDeProdutosAPI.Aplicacao.DTOs;
 using GestaoDeProdutosAPI.Aplicacao.Interfaces;
 using GestaoDeProdutosAPI.Dominio.Constantes;
+using GestaoDeProdutosAPI.Dominio.Entidades;
 using GestaoDeProdutosAPI.Dominio.Exceptions;
 using GestaoDeProdutosAPI.Dominio.Modelos;
 using Microsoft.AspNetCore.Http;
@@ -22,12 +23,12 @@ namespace GestaoDeProdutosAPI.API.Controllers
             _produtoAplicacao = ProdutoAplicacao;
         }
 
-        [HttpGet]
-        public async Task<ActionResult<List<ProdutoDto>>> BuscarTodosProdutos()
+        [HttpGet("{quantidade:int}/{pagina:int}")]
+        public async Task<ActionResult<List<ProdutoDto>>> BuscarTodosProdutos(int quantidade, int pagina)
         {
             try
             {
-                List<ProdutoDto> retorno = await _produtoAplicacao.BuscarTodosAsync();
+                Paginacao<ProdutoDto> retorno = await _produtoAplicacao.BuscarTodosAsync(quantidade, pagina);
                 return StatusCode(StatusCodes.Status200OK, retorno);
             }
             catch (Exception e)
@@ -72,14 +73,18 @@ namespace GestaoDeProdutosAPI.API.Controllers
             }
         }
 
-        [HttpPut]
-        public async Task<ActionResult<ProdutoDto>> AtualizarProduto(AtualizaProdutoModel modelo)
+        [HttpPut("{codigo}")]
+        public async Task<ActionResult<ProdutoDto>> AtualizarProduto(int codigo, AtualizaProdutoModel modelo)
         {
             try
             {
                 if (!ModelState.IsValid)
                 {
                     return StatusCode(StatusCodes.Status409Conflict, Mensagens.PreencherCampos);
+                }
+                if (codigo != modelo.Codigo)
+                {
+                    throw new Exception("Dados invalidos para atualizar registro!");
                 }
                 ProdutoDto retorno = await _produtoAplicacao.AtualizarAsync(modelo);
                 return StatusCode(StatusCodes.Status200OK, retorno);
