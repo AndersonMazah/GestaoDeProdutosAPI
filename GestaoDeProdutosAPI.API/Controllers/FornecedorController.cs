@@ -72,14 +72,18 @@ namespace GestaoDeFornecedorsAPI.API.Controllers
             }
         }
 
-        [HttpPut]
-        public async Task<ActionResult<FornecedorDto>> AtualizarFornecedor(AtualizaFornecedorModel modelo)
+        [HttpPut("{codigo}")]
+        public async Task<ActionResult<FornecedorDto>> AtualizarFornecedor(int codigo, AtualizaFornecedorModel modelo)
         {
             try
             {
                 if (!ModelState.IsValid)
                 {
                     return StatusCode(StatusCodes.Status409Conflict, Mensagens.PreencherCampos);
+                }
+                if (codigo != modelo.Codigo)
+                {
+                    throw new Exception("Dados invalidos para atualizar registro!");
                 }
                 FornecedorDto retorno = await _fornecedorAplicacao.AtualizarAsync(modelo);
                 return StatusCode(StatusCodes.Status200OK, retorno);
