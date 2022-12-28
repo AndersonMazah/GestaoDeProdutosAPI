@@ -1,4 +1,5 @@
-﻿using GestaoDeProdutosAPI.Dominio.Entidades;
+﻿using GestaoDeProdutosAPI.Dominio.Constantes;
+using GestaoDeProdutosAPI.Dominio.Entidades;
 using Microsoft.EntityFrameworkCore;
 
 namespace GestaoDeProdutosAPI.Infra.DataContext
@@ -7,7 +8,7 @@ namespace GestaoDeProdutosAPI.Infra.DataContext
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server=localhost;Database=GestaoDeProdutos;User Id=sa;Password=1q2w3e4r@#$;TrustServerCertificate=True;");
+            optionsBuilder.UseSqlServer(Configuracoes.ConnectionString);
         }
 
         public DbSet<Produto> Produtos { get; set; }
