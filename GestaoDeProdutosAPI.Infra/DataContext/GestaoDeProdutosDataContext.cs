@@ -8,7 +8,7 @@ namespace GestaoDeProdutosAPI.Infra.DataContext
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(Configuracoes.ConnectionString);
+            optionsBuilder.UseSqlServer("Server=localhost;Database=GestaoProdutos;User Id=sa;Password=1q2w3e4r@#$;");
         }
 
         public DbSet<Produto> Produtos { get; set; }
